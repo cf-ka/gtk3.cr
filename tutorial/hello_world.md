@@ -1,4 +1,4 @@
-# GTK4 Hello World from scratch
+# GTK3 Hello World from scratch
 
 First create the crystal app skeleton using:
 
@@ -8,7 +8,7 @@ crystal init app helloworld
 
 This will create a helloworld directory with some files.
 
-Then add the gtk4 shard to your shard.yml:
+Then add the gtk3 shard to your shard.yml:
 
 ```YAML
 name: helloworld
