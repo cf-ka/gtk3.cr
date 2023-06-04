@@ -19,10 +19,10 @@ targets:
     main: src/helloworld.cr
 
 dependencies:
-  gtk4:
-    github: hugopl/gtk4.cr
+  gtk3:
+    github: phil294/gtk3.cr
 
-crystal: 1.3.1
+crystal: 1.4.1
 
 license: MIT
 ```
@@ -31,12 +31,12 @@ Run `shards install` to download the dependencies, then run `bin/gi-crystal` to 
 GTK and GObject Introspection packages installed beforehand.
 
 **Note**: You need to execute `bin/gi-crystal` every time some dependency that may affect the generated bindings change, like
-the gi-crystal shard or newer versions of GTK4 library.
+the gi-crystal shard or newer versions of GTK3 library.
 
 Now it's time to write the infamous hello world. Write the following to `src/helloworld.cr`:
 
 ```Crystal
-require "gtk4"
+require "gtk3"
 
 app = Gtk::Application.new("hello.example.com", Gio::ApplicationFlags::None)
 count = 0
@@ -46,13 +46,17 @@ app.activate_signal.connect do
   window.title = "Hello World!"
   window.set_default_size(200, 200)
 
+  button_box = Gtk::ButtonBox.new
+
   button = Gtk::Button.new_with_label("Hello!!")
   button.clicked_signal.connect do
     count += 1
     button.label = "You clicked #{count} times!"
   end
-  window.child = button
-  window.present
+
+  window.add(button_box)
+  button_box.add(button)
+  window.show_all
 end
 
 exit(app.run)
